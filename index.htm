@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قارة إفريقيا - الموقع والكشوف الجغرافية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-primary: #0a0a2e;
+    --bg-secondary: #211740;
+    --bg-tertiary: #2d1b4e;
+    --bg-card: rgba(255,255,255,0.08);
+    --bg-card-hover: rgba(255,255,255,0.12);
+    --text-primary: #ffffff;
+    --text-secondary: #c8c8e8;
+    --text-muted: #9090b0;
+    --accent-1: #00d4aa;
+    --accent-2: #7c4dff;
+    --accent-3: #ff6b6b;
+    --accent-4: #ffd93d;
+    --accent-5: #6bcfff;
+    --border-color: rgba(255,255,255,0.15);
+    --border-glow: rgba(0,212,170,0.3);
+    --shadow-color: rgba(0,0,0,0.3);
+    --card-blur: blur(12px);
+    --gradient-title: linear-gradient(135deg, #00d4aa, #7c4dff, #ff6b6b, #ffd93d);
+    --correct-bg: rgba(0,212,170,0.15);
+    --correct-border: #00d4aa;
+    --wrong-bg: rgba(255,107,107,0.15);
+    --wrong-border: #ff6b6b;
+    --particles-opacity: 1;
+    --stat-bg: linear-gradient(135deg, rgba(124,77,255,0.2), rgba(0,212,170,0.2));
+    --table-header-bg: rgba(124,77,255,0.3);
+    --table-row-bg: rgba(255,255,255,0.05);
+    --table-row-alt-bg: rgba(255,255,255,0.02);
+    --progress-bg: rgba(255,255,255,0.1);
+    --tooltip-bg: rgba(0,0,0,0.85);
+    --notification-bg: rgba(33,23,64,0.95);
+    --scrolltop-bg: linear-gradient(135deg, #7c4dff, #00d4aa);
+}
+
+body.light-mode {
+    --bg-primary: #f0f4ff;
+    --bg-secondary: #e3ecff;
+    --bg-tertiary: #ffffff;
+    --bg-card: rgba(255,255,255,0.95);
+    --bg-card-hover: rgba(255,255,255,1);
+    --text-primary: #1a1a2e;
+    --text-secondary: #3a3a5e;
+    --text-muted: #6a6a8e;
+    --accent-1: #00906e;
+    --accent-2: #5a2dd0;
+    --accent-3: #d44444;
+    --accent-4: #c8a800;
+    --accent-5: #2090cc;
+    --border-color: rgba(0,0,0,0.1);
+    --border-glow: rgba(0,144,110,0.2);
+    --shadow-color: rgba(0,0,0,0.08);
+    --card-blur: blur(0px);
+    --gradient-title: linear-gradient(135deg, #00906e, #5a2dd0, #d44444, #c8a800);
+    --correct-bg: rgba(0,144,110,0.1);
+    --correct-border: #00906e;
+    --wrong-bg: rgba(212,68,68,0.1);
+    --wrong-border: #d44444;
+    --particles-opacity: 0.15;
+    --stat-bg: linear-gradient(135deg, rgba(90,45,208,0.08), rgba(0,144,110,0.08));
+    --table-header-bg: rgba(90,45,208,0.12);
+    --table-row-bg: rgba(0,0,0,0.02);
+    --table-row-alt-bg: rgba(0,0,0,0.04);
+    --progress-bg: rgba(0,0,0,0.08);
+    --tooltip-bg: rgba(0,0,0,0.75);
+    --notification-bg: rgba(255,255,255,0.95);
+    --scrolltop-bg: linear-gradient(135deg, #5a2dd0, #00906e);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.4s ease;
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+/* Progress Bar */
+#progressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    z-index: 10000;
+    transition: width 0.3s ease;
+    border-radius: 0 2px 2px 0;
+}
+
+/* Score Counter */
+#scoreCounter {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 8px 20px;
+    z-index: 9999;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--accent-4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+#scoreCounter .score-icon {
+    font-size: 18px;
+}
+
+/* Theme Toggle */
+#themeToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+#themeToggle:hover {
+    transform: rotate(180deg) scale(1.1);
+    border-color: var(--accent-1);
+    box-shadow: 0 0 20px var(--border-glow);
+}
+
+#themeToggle .tooltip {
+    position: absolute;
+    top: 58px;
+    right: 0;
+    background: var(--tooltip-bg);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+#themeToggle:hover .tooltip {
+    opacity: 1;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: var(--notification-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 24px;
+    z-index: 10001;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    box-shadow: 0 8px 25px var(--shadow-color);
+    transform: translateX(120%);
+    transition: transform 0.4s ease;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+/* Scroll To Top */
+#scrollTop {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--scrolltop-bg);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scrollTop.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#scrollTop:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+/* Particles */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: var(--particles-opacity);
+    transition: opacity 0.4s ease;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* Main Container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 20px 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Main Title */
+.main-title {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+}
+
+.main-title h1 {
+    font-size: 2.5em;
+    font-weight: 900;
+    background: var(--gradient-title);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease infinite;
+    margin-bottom: 10px;
+}
+
+.main-title .subtitle {
+    font-size: 1.2em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.main-title .badge {
+    display: inline-block;
+    background: var(--stat-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 5px 20px;
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--accent-5);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Section */
+.section {
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px 25px;
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    border-right: 4px solid var(--accent-2);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all 0.4s ease;
+}
+
+.section-header:hover {
+    border-color: var(--accent-1);
+    box-shadow: 0 0 20px var(--border-glow);
+}
+
+.section-icon {
+    font-size: 28px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--stat-bg);
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.section-header h2 {
+    font-size: 1.4em;
+    font-weight: 800;
+    color: var(--accent-1);
+}
+
+/* Card */
+.card {
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px var(--shadow-color);
+    border-color: var(--border-glow);
+}
+
+.card p, .card li {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 2;
+}
+
+.card strong, .card b {
+    color: var(--accent-1);
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    padding: 5px 0;
+    padding-right: 25px;
+    position: relative;
+}
+
+.card ul li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    color: var(--accent-2);
+    font-size: 10px;
+    top: 10px;
+}
+
+/* Definition Card */
+.def-card {
+    background: linear-gradient(135deg, rgba(124,77,255,0.1), rgba(0,212,170,0.1));
+    border: 1px solid var(--accent-2);
+    border-radius: 16px;
+    padding: 20px 25px;
+    margin: 15px 0;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.def-card::before {
+    content: '📖 تعريف';
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--accent-2);
+    color: #fff;
+    padding: 2px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.def-card .term {
+    font-weight: 800;
+    color: var(--accent-4);
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 8px;
+}
+
+.def-card .meaning {
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+/* Important Note */
+.important-note {
+    background: linear-gradient(135deg, rgba(255,217,61,0.1), rgba(255,107,107,0.1));
+    border: 1px solid var(--accent-4);
+    border-right: 4px solid var(--accent-4);
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin: 15px 0;
+    transition: all 0.4s ease;
+}
+
+.important-note::before {
+    content: '⚡ نقطة مهمة';
+    display: block;
+    font-weight: 800;
+    color: var(--accent-4);
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Explain Card (بم تفسر) */
+.explain-card {
+    background: linear-gradient(135deg, rgba(107,207,255,0.1), rgba(124,77,255,0.1));
+    border: 1px solid var(--accent-5);
+    border-radius: 16px;
+    padding: 20px 25px;
+    margin: 15px 0;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.explain-card::before {
+    content: '❓ بم تفسر';
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--accent-5);
+    color: #fff;
+    padding: 2px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.explain-card .question {
+    font-weight: 700;
+    color: var(--accent-5);
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.explain-card .answer {
+    color: var(--text-secondary);
+    padding-right: 15px;
+    border-right: 3px solid var(--accent-5);
+}
+
+/* Result Card (ما النتائج) */
+.result-card {
+    background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,217,61,0.1));
+    border: 1px solid var(--accent-3);
+    border-radius: 16px;
+    padding: 20px 25px;
+    margin: 15px 0;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.result-card::before {
+    content: '📌 ما النتائج المترتبة على';
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--accent-3);
+    color: #fff;
+    padding: 2px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.result-card .q-text {
+    font-weight: 700;
+    color: var(--accent-3);
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* Stat Card */
+.stat-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.stat-card {
+    background: var(--stat-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.stat-card .stat-number {
+    font-size: 2em;
+    font-weight: 900;
+    color: var(--accent-1);
+    display: block;
+}
+
+.stat-card .stat-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+.stat-card .stat-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Table */
+.comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 15px 0;
+    border: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    background: var(--table-header-bg);
+    color: var(--accent-1);
+    padding: 15px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.comparison-table td {
+    padding: 12px 15px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table tr:nth-child(even) td {
+    background: var(--table-row-alt-bg);
+}
+
+.comparison-table tr:nth-child(odd) td {
+    background: var(--table-row-bg);
+}
+
+/* Quiz */
+.quiz-container {
+    margin: 25px 0;
+    padding: 25px;
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.quiz-title {
+    font-size: 1.2em;
+    font-weight: 800;
+    color: var(--accent-2);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quiz-question {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.4s ease;
+}
+
+.quiz-question.answered-correct {
+    background: var(--correct-bg);
+    border-color: var(--correct-border);
+}
+
+.quiz-question.answered-wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong-border);
+}
+
+.q-text {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.q-number {
+    display: inline-block;
+    background: var(--accent-2);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option-btn {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding: 12px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-btn:hover:not(:disabled) {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-2);
+    color: var(--text-primary);
+    transform: translateX(-5px);
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.option-btn.correct {
+    background: var(--correct-bg) !important;
+    border-color: var(--correct-border) !important;
+    color: var(--correct-border) !important;
+}
+
+.option-btn.wrong {
+    background: var(--wrong-bg) !important;
+    border-color: var(--wrong-border) !important;
+    color: var(--wrong-border) !important;
+}
+
+.feedback {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    display: none;
+}
+
+.feedback.correct-feedback {
+    display: block;
+    background: var(--correct-bg);
+    color: var(--correct-border);
+    border: 1px solid var(--correct-border);
+}
+
+.feedback.wrong-feedback {
+    display: block;
+    background: var(--wrong-bg);
+    color: var(--wrong-border);
+    border: 1px solid var(--wrong-border);
+}
+
+/* True/False options */
+.tf-options {
+    display: flex;
+    gap: 10px;
+}
+
+.tf-btn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tf-btn:hover:not(:disabled) {
+    border-color: var(--accent-2);
+    transform: translateY(-2px);
+}
+
+.tf-btn.correct {
+    background: var(--correct-bg) !important;
+    border-color: var(--correct-border) !important;
+    color: var(--correct-border) !important;
+}
+
+.tf-btn.wrong {
+    background: var(--wrong-bg) !important;
+    border-color: var(--wrong-border) !important;
+    color: var(--wrong-border) !important;
+}
+
+/* Final Test */
+.final-test-header {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(124,77,255,0.15), rgba(0,212,170,0.15));
+    border: 2px solid var(--accent-2);
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+.final-test-header h2 {
+    font-size: 1.8em;
+    color: var(--accent-2);
+    margin-bottom: 10px;
+}
+
+.final-test-header p {
+    color: var(--text-muted);
+}
+
+/* Results */
+.results-container {
+    display: none;
+    text-align: center;
+    padding: 40px;
+    background: var(--bg-card);
+    backdrop-filter: var(--card-blur);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.results-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    font-weight: 900;
+    position: relative;
+}
+
+.results-circle::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    padding: 4px;
+    background: conic-gradient(var(--accent-1) var(--percentage), var(--border-color) var(--percentage));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.results-message {
+    font-size: 1.4em;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.results-detail {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.restart-btn {
+    padding: 12px 40px;
+    background: var(--scrolltop-bg);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+/* Info List */
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    padding: 8px 0;
+    padding-right: 30px;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+.info-list li::before {
+    content: '✅';
+    position: absolute;
+    right: 0;
+    font-size: 14px;
+}
+
+/* Sub-section title */
+.sub-title {
+    font-size: 1.1em;
+    font-weight: 800;
+    color: var(--accent-2);
+    margin: 20px 0 10px;
+    padding-right: 15px;
+    border-right: 3px solid var(--accent-2);
+}
+
+/* Divider */
+.divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    margin: 30px 0;
+    border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .main-title h1 {
+        font-size: 1.6em;
+    }
+    .section-header h2 {
+        font-size: 1.1em;
+    }
+    .container {
+        padding: 70px 12px 30px;
+    }
+    .stat-cards {
+        grid-template-columns: 1fr;
+    }
+    #scoreCounter {
+        top: 10px;
+        left: 70px;
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+    #themeToggle {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+    .tf-options {
+        flex-direction: column;
+    }
+}
+
+/* Highlight */
+.highlight {
+    color: var(--accent-1);
+    font-weight: 700;
+}
+
+.highlight-2 {
+    color: var(--accent-4);
+    font-weight: 700;
+}
+
+.highlight-3 {
+    color: var(--accent-3);
+    font-weight: 700;
+}
+</style>
+</head>
+<body class="dark-mode">
+
+<!-- Progress Bar -->
+<div id="progressBar"></div>
+
+<!-- Score Counter -->
+<div id="scoreCounter">
+    <span class="score-icon">⭐</span>
+    <span>النقاط: <span id="scoreValue">0</span></span>
+</div>
+
+<!-- Theme Toggle -->
+<button id="themeToggle" onclick="toggleTheme()">
+    <span id="themeIcon">🌙</span>
+    <span class="tooltip" id="themeTooltip">تبديل إلى الوضع النهاري</span>
+</button>
+
+<!-- Notification -->
+<div id="notification" class="notification"></div>
+
+<!-- Scroll To Top -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
+
+<!-- Particles -->
+<div id="particles"></div>
+
+<!-- Main Container -->
+<div class="container">
+
+    <!-- Main Title -->
+    <div class="main-title">
+        <h1>🌍 قارة إفريقيا</h1>
+        <div class="subtitle">الموقع والكشوف الجغرافية</div>
+        <div class="badge">📚 الدرس الأول - الصف الأول الإعدادي - الدراسات الاجتماعية</div>
+    </div>
+
+    <!-- ============ القسم الأول: تمهيد ومساحة القارة ============ -->
+    <div class="section" id="section1">
+        <div class="section-header">
+            <div class="section-icon">🌐</div>
+            <h2>تمهيد: قارات العالم ومساحة إفريقيا</h2>
+        </div>
+
+        <div class="card">
+            <p>تعرفنا في الأعوام السابقة أن <strong>العالم يتكون من سبع قارات</strong>، تنقسم إلى مجموعتين:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>قارات العالم القديم</th>
+                        <th>قارات العالم الجديد</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>آسيا</td>
+                        <td>أمريكا الشمالية</td>
+                    </tr>
+                    <tr>
+                        <td>إفريقيا</td>
+                        <td>أمريكا الجنوبية</td>
+                    </tr>
+                    <tr>
+                        <td>أوروبا</td>
+                        <td>أستراليا</td>
+                    </tr>
+                    <tr>
+                        <td>—</td>
+                        <td>أنتاركتيكا (القارة القطبية الجنوبية)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="important-note">
+                <p>قارتنا <strong>إفريقيا</strong> هي إحدى قارات العالم القديم، ووطننا الحبيب <strong>مصر جزءٌ منها</strong>.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="sub-title">مساحة قارة إفريقيا</div>
+            <p>قارتنا الإفريقية هي <strong>ثاني أكبر قارات العالم من حيث المساحة</strong> بعد قارة آسيا.</p>
+
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <span class="stat-icon">📐</span>
+                    <span class="stat-number">30.4</span>
+                    <span class="stat-label">مليون كم² (المساحة)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🌍</span>
+                    <span class="stat-number">%20</span>
+                    <span class="stat-label">من مساحة يابس الكرة الأرضية (الخُمس)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- أسئلة القسم الأول -->
+        <div class="quiz-container">
+            <div class="quiz-title">🎯 اختبر نفسك - تمهيد ومساحة إفريقيا</div>
+
+            <div class="quiz-question" id="q1_1">
+                <div class="q-text"><span class="q-number">1</span> تعد قارة إفريقيا ............... أكبر قارات العالم من حيث المساحة.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_1','wrong')">أولى</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_1','correct')">ثاني</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_1','wrong')">ثالث</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_1','wrong')">رابع</button>
+                </div>
+                <div class="feedback" id="feedback_q1_1"></div>
+            </div>
+
+            <div class="quiz-question" id="q1_2">
+                <div class="q-text"><span class="q-number">2</span> تمثل إفريقيا من مساحة يابس الكرة الأرضية حوالي ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_2','wrong')">الربع (25%)</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_2','correct')">الخُمس (20%)</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_2','wrong')">الثلث (33%)</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_2','wrong')">النصف (50%)</button>
+                </div>
+                <div class="feedback" id="feedback_q1_2"></div>
+            </div>
+
+            <div class="quiz-question" id="q1_3">
+                <div class="q-text"><span class="q-number">3</span> من قارات العالم القديم:</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_3','wrong')">أمريكا الشمالية</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_3','wrong')">أستراليا</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_3','correct')">أوروبا</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q1_3','wrong')">أنتاركتيكا</button>
+                </div>
+                <div class="feedback" id="feedback_q1_3"></div>
+            </div>
+
+            <div class="quiz-question" id="q1_4">
+                <div class="q-text"><span class="q-number">4</span> صح أم خطأ: تبلغ مساحة قارة إفريقيا حوالي 30.4 مليون كم².</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkAnswer(this,'q1_4','correct')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkAnswer(this,'q1_4','wrong')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_q1_4"></div>
+            </div>
+
+            <div class="quiz-question" id="q1_5">
+                <div class="q-text"><span class="q-number">5</span> صح أم خطأ: تعد قارة إفريقيا أولى قارات العالم من حيث المساحة.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkAnswer(this,'q1_5','wrong')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkAnswer(this,'q1_5','correct')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_q1_5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ القسم الثاني: الموقع الفلكي والجغرافي ============ -->
+    <div class="section" id="section2">
+        <div class="section-header">
+            <div class="section-icon">🗺️</div>
+            <h2>أولاً: موقع قارة إفريقيا بالنسبة للعالم</h2>
+        </div>
+
+        <div class="def-card">
+            <div class="term">الموقع الفلكي</div>
+            <div class="meaning">هو موقع المكان بالنسبة لخطوط الطول ودوائر العرض.</div>
+        </div>
+
+        <div class="def-card">
+            <div class="term">الموقع الجغرافي</div>
+            <div class="meaning">هو موقع المكان بالنسبة للأماكن الأخرى من بحار ومحيطات وقارات أو دول مجاورة.</div>
+        </div>
+
+        <div class="card">
+            <div class="sub-title">1️⃣ الموقع الفلكي</div>
+            <p><strong>تمتد قارة إفريقيا بين:</strong></p>
+            <ul class="info-list">
+                <li>دائرتي عرض <strong>37° 30' شمالاً</strong> و <strong>34° 30' جنوباً</strong> (أي تمتد في أكثر من <strong>70 دائرة عرضية</strong>)</li>
+                <li>خطي طول <strong>51° شرقاً</strong> و <strong>17° غرباً</strong> (أي تمتد في حوالي <strong>68 خط طول</strong>)</li>
+            </ul>
+
+            <div class="sub-title">دوائر العرض الرئيسية التي تمر بقارة إفريقيا:</div>
+            <ul class="info-list">
+                <li><strong>مدار السرطان</strong> في الشمال</li>
+                <li><strong>دائرة الاستواء</strong> في الوسط تقريباً</li>
+                <li><strong>مدار الجدي</strong> في الجنوب</li>
+            </ul>
+
+            <p>كما يمر بها <strong>خط الطول الرئيسي (جرينتش)</strong> في الغرب ويمر بدول: <span class="highlight">الجزائر</span> - <span class="highlight">مالي</span> - <span class="highlight">بوركينا فاسو</span> - <span class="highlight">غانا</span></p>
+
+            <div class="important-note">
+                <p>تمتد إفريقيا بين <strong>نصفي الكرة الأرضية الشمالي والجنوبي</strong>، حيث يقع نحو <strong>ثلثي مساحتها في النصف الشمالي</strong> والثلث الآخر في النصف الجنوبي.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="sub-title">2️⃣ الموقع الجغرافي</div>
+            <p>تقع إفريقيا في <strong>وسط قارات العالم</strong> وتطل على مسطحات مائية مهمة حيث يحدها:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>الجهة</th>
+                        <th>المسطح المائي</th>
+                        <th>ملاحظة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>شمالاً</strong></td>
+                        <td>البحر المتوسط</td>
+                        <td>يفصلها عن أوروبا</td>
+                    </tr>
+                    <tr>
+                        <td><strong>شرقاً</strong></td>
+                        <td>البحر الأحمر والمحيط الهندي</td>
+                        <td>يفصلانها عن قارة آسيا</td>
+                    </tr>
+                    <tr>
+                        <td><strong>غرباً</strong></td>
+                        <td>المحيط الأطلنطي</td>
+                        <td>يفصلها عن قارتي أمريكا الشمالية والجنوبية</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>كما أن قارة إفريقيا تقترب من:</p>
+            <ul class="info-list">
+                <li>قارة <strong>أوروبا</strong> عند <span class="highlight">مضيق جبل طارق</span></li>
+                <li>قارة <strong>آسيا</strong> عند <span class="highlight">مضيق باب المندب</span> وتتصل بها عن طريق <span class="highlight">شبه جزيرة سيناء</span></li>
+            </ul>
+
+            <div class="important-note">
+                <p>شبه جزيرة سيناء تُعد جزءاً غالياً من وطننا الحبيب <strong>مصر</strong> الذي يقع في <strong>الركن الشمالي الشرقي</strong> من قارة إفريقيا.</p>
+            </div>
+        </div>
+
+        <div class="explain-card">
+            <div class="question">بم تفسر: لشبه جزيرة سيناء أهمية حضارية واستراتيجية كبيرة عبر العصور بالنسبة للقارة الإفريقية؟</div>
+            <div class="answer">
+                <p><strong>حضارية:</strong> بسبب انتقال بعض الثقافات والحضارات عن طريقها من آسيا إلى إفريقيا مثل الحضارة الإسلامية.</p>
+                <p><strong>استراتيجية:</strong> بسبب تعرض مصر للعديد من الحملات العسكرية من خلالها.</p>
+            </div>
+        </div>
+
+        <div class="def-card">
+            <div class="term">الحضارة</div>
+            <div class="meaning">مجموع الإنتاج الثقافي مثل العادات والتقاليد والعلوم والفنون والقيم، والإنتاج المادي مثل القلاع والمباني والقصور، وهو ما يميز مجتمعنا عن غيره.</div>
+        </div>
+
+        <div class="important-note">
+            <p>الحفاظ على أمن شبه جزيرة سيناء ضرورة للحفاظ على <strong>الأمن القومي المصري والإفريقي</strong>.</p>
+        </div>
+
+        <!-- أسئلة القسم الثاني -->
+        <div class="quiz-container">
+            <div class="quiz-title">🎯 اختبر نفسك - الموقع الفلكي والجغرافي</div>
+
+            <div class="quiz-question" id="q2_1">
+                <div class="q-text"><span class="q-number">1</span> يمر خط جرينتش ............... إفريقيا.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_1','wrong')">شمال</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_1','wrong')">جنوب</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_1','wrong')">شرق</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_1','correct')">غرب</button>
+                </div>
+                <div class="feedback" id="feedback_q2_1"></div>
+            </div>
+
+            <div class="quiz-question" id="q2_2">
+                <div class="q-text"><span class="q-number">2</span> يفصل البحر المتوسط قارة إفريقيا عن قارة ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_2','wrong')">آسيا</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_2','wrong')">أستراليا</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_2','wrong')">أمريكا الجنوبية</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_2','correct')">أوروبا</button>
+                </div>
+                <div class="feedback" id="feedback_q2_2"></div>
+            </div>
+
+            <div class="quiz-question" id="q2_3">
+                <div class="q-text"><span class="q-number">3</span> يحد قارة إفريقيا من الجهة الشرقية ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_3','wrong')">البحر المتوسط</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_3','wrong')">المحيط الأطلنطي</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_3','correct')">البحر الأحمر والمحيط الهندي</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_3','wrong')">المحيط الهادي</button>
+                </div>
+                <div class="feedback" id="feedback_q2_3"></div>
+            </div>
+
+            <div class="quiz-question" id="q2_4">
+                <div class="q-text"><span class="q-number">4</span> تتصل قارة إفريقيا بقارة آسيا برياً عن طريق ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_4','wrong')">مضيق باب المندب</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_4','wrong')">مضيق جبل طارق</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_4','wrong')">قناة السويس</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q2_4','correct')">شبه جزيرة سيناء</button>
+                </div>
+                <div class="feedback" id="feedback_q2_4"></div>
+            </div>
+
+            <div class="quiz-question" id="q2_5">
+                <div class="q-text"><span class="q-number">5</span> صح أم خطأ: يقع ثلثا مساحة قارة إفريقيا في النصف الجنوبي من الكرة الأرضية.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkAnswer(this,'q2_5','wrong')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkAnswer(this,'q2_5','correct')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_q2_5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ القسم الثالث: أهمية موقع قارة إفريقيا ============ -->
+    <div class="section" id="section3">
+        <div class="section-header">
+            <div class="section-icon">⭐</div>
+            <h2>ثانياً: أهمية موقع قارة إفريقيا</h2>
+        </div>
+
+        <!-- الأهمية الاستراتيجية -->
+        <div class="card">
+            <div class="sub-title">1️⃣ الأهمية الاستراتيجية</div>
+            <div class="def-card">
+                <div class="term">الأهمية الاستراتيجية</div>
+                <div class="meaning">هي الأهمية وقت السلم والحروب والأزمات.</div>
+            </div>
+
+            <div class="explain-card">
+                <div class="question">بم تفسر: لقارة إفريقيا أهمية استراتيجية كبيرة؟</div>
+                <div class="answer">
+                    <p>لأنها تُشرف بحكم موقعها الجغرافي على <strong>ممرات مائية مهمة</strong> مثل:</p>
+                    <ul class="info-list">
+                        <li><strong>قناة السويس</strong> (في مصر)</li>
+                        <li><strong>مضيق باب المندب</strong> (بين اليمن وجيبوتي)</li>
+                        <li><strong>مضيق جبل طارق</strong> (بين المغرب وإسبانيا)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأهمية الاقتصادية -->
+        <div class="card">
+            <div class="sub-title">2️⃣ الأهمية الاقتصادية</div>
+            <div class="explain-card">
+                <div class="question">بم تفسر: لقارة إفريقيا أهمية اقتصادية كبيرة؟</div>
+                <div class="answer">
+                    <p>بسبب:</p>
+                    <ul class="info-list">
+                        <li><strong>الموقع الجغرافي</strong> الذي أدى إلى تحكمها في أهم طرق الملاحة العالمية.</li>
+                        <li><strong>الموقع الفلكي</strong> الذي أدى إلى تنوع مناخها وبالتالي تنوع النباتات الطبيعية والحيوانات والمحاصيل الزراعية.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأهمية الحضارية -->
+        <div class="card">
+            <div class="sub-title">3️⃣ الأهمية الحضارية</div>
+            <div class="explain-card">
+                <div class="question">بم تفسر: لقارة إفريقيا أهمية حضارية كبيرة؟</div>
+                <div class="answer">
+                    <p>بسبب نشأة العديد من <strong>أقدم الحضارات في العالم</strong> على أرضها، مثل:</p>
+                    <ul class="info-list">
+                        <li><strong>الحضارة المصرية القديمة</strong> في مصر</li>
+                        <li><strong>حضارة كوش</strong> في السودان</li>
+                        <li><strong>حضارة أكسوم</strong> في إريتريا وإثيوبيا</li>
+                        <li><strong>حضارة قرطاج</strong> في تونس</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- أسئلة القسم الثالث -->
+        <div class="quiz-container">
+            <div class="quiz-title">🎯 اختبر نفسك - أهمية موقع إفريقيا</div>
+
+            <div class="quiz-question" id="q3_1">
+                <div class="q-text"><span class="q-number">1</span> ما المقصود بالأهمية الاستراتيجية؟</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_1','wrong')">الأهمية وقت السلم فقط</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_1','correct')">الأهمية وقت السلم والحروب والأزمات</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_1','wrong')">الأهمية الاقتصادية للموقع</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_1','wrong')">الأهمية التاريخية فقط</button>
+                </div>
+                <div class="feedback" id="feedback_q3_1"></div>
+            </div>
+
+            <div class="quiz-question" id="q3_2">
+                <div class="q-text"><span class="q-number">2</span> نشأت حضارة كوش في ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_2','wrong')">مصر</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_2','correct')">السودان</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_2','wrong')">تونس</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_2','wrong')">إثيوبيا</button>
+                </div>
+                <div class="feedback" id="feedback_q3_2"></div>
+            </div>
+
+            <div class="quiz-question" id="q3_3">
+                <div class="q-text"><span class="q-number">3</span> بم تفسر: تنوع المناخ داخل قارة إفريقيا؟</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_3','wrong')">بسبب الموقع الجغرافي</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_3','correct')">بسبب الموقع الفلكي</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_3','wrong')">بسبب المساحة الصغيرة</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_3','wrong')">بسبب قربها من أوروبا</button>
+                </div>
+                <div class="feedback" id="feedback_q3_3"></div>
+            </div>
+
+            <div class="quiz-question" id="q3_4">
+                <div class="q-text"><span class="q-number">4</span> صح أم خطأ: دخلت الحضارة الإسلامية إلى قارة إفريقيا عبر شبه جزيرة سيناء.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkAnswer(this,'q3_4','correct')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkAnswer(this,'q3_4','wrong')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_q3_4"></div>
+            </div>
+
+            <div class="quiz-question" id="q3_5">
+                <div class="q-text"><span class="q-number">5</span> نشأت حضارة قرطاج في ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_5','wrong')">المغرب</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_5','wrong')">مصر</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_5','correct')">تونس</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q3_5','wrong')">الجزائر</button>
+                </div>
+                <div class="feedback" id="feedback_q3_5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ القسم الرابع: الكشوف الجغرافية ============ -->
+    <div class="section" id="section4">
+        <div class="section-header">
+            <div class="section-icon">🧭</div>
+            <h2>ثالثاً: الكشوف الجغرافية لقارة إفريقيا</h2>
+        </div>
+
+        <div class="card">
+            <p>بالرغم من أن قارة إفريقيا إحدى قارات العالم القديم، إلا أن كثيراً من أجزائها قد تأخر في استكشافها. وتمثلت الكشوف الجغرافية في ثلاثة أدوار رئيسية:</p>
+        </div>
+
+        <!-- دور مصر -->
+        <div class="card">
+            <div class="sub-title">1️⃣ دور مصر في اكتشاف قارة إفريقيا</div>
+            <p><strong>كان لمصر دور مهم في اكتشاف قارة إفريقيا منذ القدم:</strong></p>
+
+            <div class="sub-title" style="border-color: var(--accent-4)">📜 في عصر المصريين القدماء</div>
+            <ul class="info-list">
+                <li>قام الرحالة <strong>(حر - خوف)</strong> بأربع رحلات نحو الجنوب وكان من أوائل المصريين الذين اكتشفوا أجزاء من قارة إفريقيا.</li>
+                <li>أرسل الملك <strong>نخاو الثاني</strong> بعثة للدوران حول إفريقيا بدأت من <strong>البحر الأحمر</strong> وعادت عبر <strong>مضيق جبل طارق</strong> واستمرت الرحلة <strong>ثلاث سنوات</strong>.</li>
+                <li>وصل المصريون القدماء إلى السودان والقرن الإفريقي وامتد التأثير الحضاري المصري إلى غرب إفريقيا وأعالي منابع النيل الاستوائية.</li>
+            </ul>
+
+            <div class="sub-title" style="border-color: var(--accent-4)">🏛️ في العصر الحديث</div>
+            <ul class="info-list">
+                <li><strong>محمد علي باشا:</strong> تم إرسال رحلات لاستكشاف منابع النيل عام <strong>1839م</strong> وانتهت باكتشاف <strong>النيل الأبيض</strong> ورسم خريطة للنيل حتى جنوب السودان.</li>
+                <li><strong>الخديوي إسماعيل:</strong> حفيد محمد علي باشا، اهتم باكتشاف منابع النيل ووصل حكمه إلى <strong>جنوب دائرة الاستواء</strong>.</li>
+            </ul>
+        </div>
+
+        <!-- دور العرب -->
+        <div class="card">
+            <div class="sub-title">2️⃣ دور العرب في اكتشاف قارة إفريقيا (في العصور الوسطى)</div>
+
+            <div class="sub-title" style="border-color: var(--accent-5)">🧳 الجغرافيون والرحالة العرب</div>
+            <p>أسهموا من خلال رحلاتهم في الكشف عن أجزاء عديدة من إفريقيا ومنهم:</p>
+            <ul class="info-list">
+                <li><strong>ابن بطوطة:</strong> قام برحلات مهمة في شمال وغرب إفريقيا، واستطاع أن يخترق الصحراء الكبرى من الشمال إلى الجنوب حتى وصل إلى <strong>مالي</strong>.</li>
+                <li><strong>المسعودي:</strong> كان من أوائل الرحالة العرب الذين زاروا إفريقيا وكتبوا عنها.</li>
+            </ul>
+
+            <div class="sub-title" style="border-color: var(--accent-5)">🐪 التجار العرب</div>
+            <ul class="info-list">
+                <li>وصلت قوافلهم إلى <strong>السودان وبلاد الحبشة وجزر القمر</strong> وغيرها وساهموا في <strong>نشر الإسلام</strong>.</li>
+                <li>تعددت الممالك الإسلامية على السواحل الشرقية للقارة الإفريقية وامتدت إلى هضبة البحيرات الاستوائية.</li>
+                <li>تكونت بعض الممالك الإسلامية في <strong>غرب إفريقيا</strong>.</li>
+            </ul>
+        </div>
+
+        <!-- دور الأوروبيين -->
+        <div class="card">
+            <div class="sub-title">3️⃣ دور الأوروبيين في اكتشاف قارة إفريقيا</div>
+
+            <div class="sub-title" style="border-color: var(--accent-3)">⛵ في القرن الـ15م (في عهد الأمير هنري الملاح)</div>
+            <ul class="info-list">
+                <li>بدأ <strong>البرتغاليون</strong> محاولتهم لاكتشاف إفريقيا حيث استفادوا مما كتبه العرب عن إفريقيا.</li>
+                <li>حاولوا الوصول إلى <strong>الهند</strong> عن طريق الدوران حول إفريقيا.</li>
+                <li>أسس البرتغاليون <strong>الموانئ والمراكز التجارية</strong> على طول طريق <strong>رأس الرجاء الصالح</strong> لتأمين الملاحة والتجارة.</li>
+            </ul>
+
+            <div class="sub-title" style="border-color: var(--accent-3)">🔭 في نهاية القرن الـ18 وخلال القرن الـ19م</div>
+            <ul class="info-list">
+                <li>كان للأوروبيين دور بارز في اكتشاف <strong>منابع نهر النيل</strong>.</li>
+            </ul>
+
+            <div class="explain-card">
+                <div class="question">بم تفسر: اهتم الأوروبيون بالكشوف الجغرافية بإفريقيا؟</div>
+                <div class="answer">
+                    <p>بهدف:</p>
+                    <ul class="info-list">
+                        <li>الوصول إلى <strong>الهند</strong> عن طريق الدوران حول إفريقيا.</li>
+                        <li><strong>نهب خيرات القارة الإفريقية</strong> واستغلال ثرواتها.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>توالت الكشوف لقارة إفريقيا من <strong>الإنجليز والفرنسيين والهولنديين</strong> وغيرهم من أجل البحث عن موارد إفريقيا وثرواتها الطبيعية واستغلالها.</p>
+
+            <div class="result-card">
+                <div class="q-text" style="margin-top: 10px;">تسارع الدول الأوروبية الاستعمارية على قارة إفريقيا لنهب خيراتها</div>
+                <div class="answer">
+                    <p>وقد ترتب على ذلك:</p>
+                    <ul class="info-list">
+                        <li>إقامة <strong>مستعمرات</strong> لها في كافة أنحاء القارة.</li>
+                        <li><strong>تقسيم إفريقيا</strong> لعدد كبير من الدول لضمان استمرار نفوذها واستغلال ثرواتها.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="important-note">
+                <p>مما أدى إلى معاناة إفريقيا من <strong class="highlight-3">الفقر</strong> رغم ما تمتلكه من <strong>ثروات متعددة</strong>.</p>
+            </div>
+        </div>
+
+        <!-- أسئلة القسم الرابع -->
+        <div class="quiz-container">
+            <div class="quiz-title">🎯 اختبر نفسك - الكشوف الجغرافية</div>
+
+            <div class="quiz-question" id="q4_1">
+                <div class="q-text"><span class="q-number">1</span> قام الرحالة (حر - خوف) باستكشاف قارة إفريقيا في ............... رحلات.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_1','wrong')">ثلاث</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_1','correct')">أربع</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_1','wrong')">خمس</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_1','wrong')">سبع</button>
+                </div>
+                <div class="feedback" id="feedback_q4_1"></div>
+            </div>
+
+            <div class="quiz-question" id="q4_2">
+                <div class="q-text"><span class="q-number">2</span> تمثلت نقطة عودة رحلات الملك نخاو الثاني في أحد المعابر وهو ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_2','wrong')">مضيق موزمبيق</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_2','correct')">مضيق جبل طارق</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_2','wrong')">قناة السويس</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_2','wrong')">مضيق باب المندب</button>
+                </div>
+                <div class="feedback" id="feedback_q4_2"></div>
+            </div>
+
+            <div class="quiz-question" id="q4_3">
+                <div class="q-text"><span class="q-number">3</span> استطاع ............... أن يخترق الصحراء الكبرى من الشمال إلى الجنوب حتى وصل إلى مالي.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_3','correct')">ابن بطوطة</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_3','wrong')">محمد علي</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_3','wrong')">المسعودي</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_3','wrong')">الخديوي إسماعيل</button>
+                </div>
+                <div class="feedback" id="feedback_q4_3"></div>
+            </div>
+
+            <div class="quiz-question" id="q4_4">
+                <div class="q-text"><span class="q-number">4</span> صح أم خطأ: بدأت محاولات الإنجليز لاكتشاف إفريقيا في القرن الـ15م خلال عهد الأمير هنري الملاح.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkAnswer(this,'q4_4','wrong')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkAnswer(this,'q4_4','correct')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_q4_4"></div>
+            </div>
+
+            <div class="quiz-question" id="q4_5">
+                <div class="q-text"><span class="q-number">5</span> انتهت رحلات محمد علي الاستكشافية في إفريقيا باكتشاف ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_5','correct')">النيل الأبيض</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_5','wrong')">النيل الأزرق</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_5','wrong')">البحر الأسود</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q4_5','wrong')">البحر الميت</button>
+                </div>
+                <div class="feedback" id="feedback_q4_5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ القسم الخامس: الخريطة السياسية والعلاقات ============ -->
+    <div class="section" id="section5">
+        <div class="section-header">
+            <div class="section-icon">🏛️</div>
+            <h2>رابعاً: الخريطة السياسية لقارة إفريقيا والعلاقات المصرية الإفريقية</h2>
+        </div>
+
+        <div class="card">
+            <div class="sub-title">الخريطة السياسية لقارة إفريقيا</div>
+
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <span class="stat-icon">🏳️</span>
+                    <span class="stat-number">54</span>
+                    <span class="stat-label">دولة مختلفة المساحة</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🌙</span>
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">دول عربية في إفريقيا</span>
+                </div>
+            </div>
+
+            <ul class="info-list">
+                <li>تعد <strong>الجزائر</strong> أكبر دول القارة الإفريقية من حيث المساحة.</li>
+                <li>تقع <strong>مصر</strong> في الركن الشمالي الشرقي من قارة إفريقيا وتعد من أكبر دول القارة مساحة.</li>
+            </ul>
+
+            <div class="important-note">
+                <p><strong>الدول العربية في إفريقيا (10 دول):</strong> مصر - السودان - ليبيا - تونس - الجزائر - المغرب - موريتانيا - جيبوتي - الصومال - جزر القمر.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="sub-title">أنواع دول قارة إفريقيا</div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>دول ساحلية</th>
+                        <th>دول حبيسة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>وهي التي تطل على بحار ومحيطات</td>
+                        <td>وهي التي لا تطل على مسطحات مائية (البحار أو المحيطات)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="sub-title">العلاقات المصرية الإفريقية</div>
+            <ul class="info-list">
+                <li>تعد مصر من أهم وأكبر دول القارة والتي تبذل جهوداً مكثفة لتعميق العلاقات المصرية الإفريقية مما يسهم في تحقيق <strong>التنمية المستدامة</strong>.</li>
+                <li>تم انتخاب مصر لرئاسة <strong>الاتحاد الإفريقي</strong> عام <strong>2019م</strong>.</li>
+            </ul>
+
+            <div class="result-card">
+                <div class="q-text" style="margin-top: 10px;">ما النتائج المترتبة على انتخاب مصر لرئاسة الاتحاد الإفريقي عام 2019م؟</div>
+                <div class="answer">
+                    <p>أدى ذلك إلى وجود فرصة قوية لتعميق دور مصر الريادي في قارة إفريقيا وتدعيم علاقاتها مع دول وشعوب القارة الإفريقية.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- أسئلة القسم الخامس -->
+        <div class="quiz-container">
+            <div class="quiz-title">🎯 اختبر نفسك - الخريطة السياسية والعلاقات</div>
+
+            <div class="quiz-question" id="q5_1">
+                <div class="q-text"><span class="q-number">1</span> تضم قارة إفريقيا ............... دولة مختلفة المساحة.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_1','wrong')">44</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_1','correct')">54</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_1','wrong')">64</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_1','wrong')">34</button>
+                </div>
+                <div class="feedback" id="feedback_q5_1"></div>
+            </div>
+
+            <div class="quiz-question" id="q5_2">
+                <div class="q-text"><span class="q-number">2</span> أكبر دول القارة الإفريقية من حيث المساحة هي ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_2','wrong')">مصر</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_2','wrong')">السودان</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_2','correct')">الجزائر</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_2','wrong')">ليبيا</button>
+                </div>
+                <div class="feedback" id="feedback_q5_2"></div>
+            </div>
+
+            <div class="quiz-question" id="q5_3">
+                <div class="q-text"><span class="q-number">3</span> تم انتخاب مصر لرئاسة الاتحاد الإفريقي عام ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_3','wrong')">2015م</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_3','wrong')">2017م</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_3','correct')">2019م</button>
+                    <button class="option-btn" onclick="checkAnswer(this,'q5_3','wrong')">2021م</button>
+                </div>
+                <div class="feedback" id="feedback_q5_3"></div>
+            </div>
+
+            <div class="quiz-question" id="q5_4">
+                <div class="q-text"><span class="q-number">4</span> صح أم خطأ: الدول الحبيسة هي التي تطل على بحار ومحيطات.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkAnswer(this,'q5_4','wrong')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkAnswer(this,'q5_4','correct')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_q5_4"></div>
+            </div>
+
+            <div class="quiz-question" id="q5_5">
+                <div class="q-text"><span class="q-number">5</span> صح أم خطأ: يوجد في إفريقيا 10 دول عربية.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkAnswer(this,'q5_5','correct')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkAnswer(this,'q5_5','wrong')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_q5_5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ الاختبار النهائي ============ -->
+    <div class="section" id="finalTestSection">
+        <div class="final-test-header">
+            <h2>📝 الاختبار النهائي الشامل</h2>
+            <p>10 أسئلة متنوعة تغطي جميع أجزاء الدرس</p>
+        </div>
+
+        <div class="quiz-container" id="finalQuizContainer">
+            <div class="quiz-title">🏆 الاختبار النهائي</div>
+
+            <div class="quiz-question" id="qf_1">
+                <div class="q-text"><span class="q-number">1</span> تمتد قارة إفريقيا في حوالي ............... خط طول.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkFinal(this,'qf_1','wrong')">70</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_1','correct')">68</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_1','wrong')">55</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_1','wrong')">80</button>
+                </div>
+                <div class="feedback" id="feedback_qf_1"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_2">
+                <div class="q-text"><span class="q-number">2</span> يقترب اليابس الإفريقي من اليابس الأوروبي عند ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkFinal(this,'qf_2','correct')">مضيق جبل طارق</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_2','wrong')">مضيق باب المندب</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_2','wrong')">شبه جزيرة سيناء</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_2','wrong')">قناة السويس</button>
+                </div>
+                <div class="feedback" id="feedback_qf_2"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_3">
+                <div class="q-text"><span class="q-number">3</span> يمر في قارة إفريقيا ............... دوائر عرض رئيسية.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkFinal(this,'qf_3','correct')">ثلاث</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_3','wrong')">أربع</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_3','wrong')">خمس</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_3','wrong')">ست</button>
+                </div>
+                <div class="feedback" id="feedback_qf_3"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_4">
+                <div class="q-text"><span class="q-number">4</span> وصل النفوذ المصري في عهد ............... إلى جنوب دائرة الاستواء.</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkFinal(this,'qf_4','wrong')">ابن بطوطة</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_4','wrong')">محمد علي</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_4','wrong')">المسعودي</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_4','correct')">الخديوي إسماعيل</button>
+                </div>
+                <div class="feedback" id="feedback_qf_4"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_5">
+                <div class="q-text"><span class="q-number">5</span> صح أم خطأ: تحكمت إفريقيا في طرق الملاحة العالمية عبر العصور بفضل موقعها الفلكي.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkFinal(this,'qf_5','wrong')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkFinal(this,'qf_5','correct')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_qf_5"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_6">
+                <div class="q-text"><span class="q-number">6</span> كان هنري الملاح أول الأمراء البرتغاليين المهتمين باكتشاف قارة إفريقيا في القرن الـ ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkFinal(this,'qf_6','wrong')">13</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_6','wrong')">14</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_6','correct')">15</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_6','wrong')">16</button>
+                </div>
+                <div class="feedback" id="feedback_qf_6"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_7">
+                <div class="q-text"><span class="q-number">7</span> يحد المحيط الأطلنطي قارة إفريقيا من جهة ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkFinal(this,'qf_7','wrong')">الشمال</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_7','wrong')">الجنوب</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_7','wrong')">الشرق</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_7','correct')">الغرب</button>
+                </div>
+                <div class="feedback" id="feedback_qf_7"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_8">
+                <div class="q-text"><span class="q-number">8</span> صح أم خطأ: المسعودي من أوائل الرحالة العرب الذين زاروا إفريقيا وكتبوا عنها.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkFinal(this,'qf_8','correct')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkFinal(this,'qf_8','wrong')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_qf_8"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_9">
+                <div class="q-text"><span class="q-number">9</span> يصل مضيق باب المندب بين البحر الأحمر و ...</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkFinal(this,'qf_9','wrong')">المحيط الأطلنطي</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_9','wrong')">خليج عدن</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_9','wrong')">البحر المتوسط</button>
+                    <button class="option-btn" onclick="checkFinal(this,'qf_9','wrong')">المحيط الهادي</button>
+                </div>
+                <div class="feedback" id="feedback_qf_9"></div>
+            </div>
+
+            <div class="quiz-question" id="qf_10">
+                <div class="q-text"><span class="q-number">10</span> صح أم خطأ: تقع قارة إفريقيا وسط قارات العالم وتطل على مسطحات مائية مهمة.</div>
+                <div class="tf-options">
+                    <button class="tf-btn" onclick="checkFinal(this,'qf_10','correct')">✅ صح</button>
+                    <button class="tf-btn" onclick="checkFinal(this,'qf_10','wrong')">❌ خطأ</button>
+                </div>
+                <div class="feedback" id="feedback_qf_10"></div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="results-container" id="resultsContainer">
+            <div class="results-circle" id="resultsCircle" style="--percentage: 0%;">
+                <span id="resultsPercent">0%</span>
+            </div>
+            <div class="results-message" id="resultsMessage"></div>
+            <div class="results-detail" id="resultsDetail"></div>
+            <button class="restart-btn" onclick="restartFinalTest()">🔄 إعادة الاختبار</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ===== Variables =====
+let score = 0;
+let totalQuestions = 25; // 5 sections x 5 questions
+let answeredQuestions = new Set();
+let finalScore = 0;
+let finalTotal = 10;
+let finalAnswered = new Set();
+
+// ===== Theme Toggle =====
+function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('themeIcon');
+    const tooltip = document.getElementById('themeTooltip');
+    
+    if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        icon.textContent = '☀️';
+        tooltip.textContent = 'تبديل إلى الوضع الليلي';
+        localStorage.setItem('theme', 'light');
+        showNotification('☀️ تم تفعيل الوضع النهاري');
+    } else {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        icon.textContent = '🌙';
+        tooltip.textContent = 'تبديل إلى الوضع النهاري';
+        localStorage.setItem('theme', 'dark');
+        showNotification('🌙 تم تفعيل الوضع الليلي');
+    }
+}
+
+// Load saved theme
+function loadTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        document.getElementById('themeIcon').textContent = '☀️';
+        document.getElementById('themeTooltip').textContent = 'تبديل إلى الوضع الليلي';
+    }
+}
+
+// ===== Notification =====
+function showNotification(msg) {
+    const notif = document.getElementById('notification');
+    notif.textContent = msg;
+    notif.classList.add('show');
+    setTimeout(() => notif.classList.remove('show'), 2500);
+}
+
+// ===== Check Answer (Section Quizzes) =====
+function checkAnswer(btn, qId, result) {
+    if (answeredQuestions.has(qId)) return;
+    answeredQuestions.add(qId);
+    
+    const question = document.getElementById(qId);
+    const feedback = document.getElementById('feedback_' + qId);
+    const buttons = question.querySelectorAll('.option-btn, .tf-btn');
+    
+    buttons.forEach(b => b.disabled = true);
+    
+    if (result === 'correct') {
+        btn.classList.add('correct');
+        question.classList.add('answered-correct');
+        feedback.className = 'feedback correct-feedback';
+        feedback.textContent = '✅ إجابة صحيحة! أحسنت 🎉';
+        score++;
+        updateScore();
+    } else {
+        btn.classList.add('wrong');
+        question.classList.add('answered-wrong');
+        feedback.className = 'feedback wrong-feedback';
+        // Find correct answer
+        buttons.forEach(b => {
+            if (b.onclick && b.onclick.toString().includes("'correct'")) {
+                b.classList.add('correct');
+            }
+        });
+        feedback.textContent = '❌ إجابة خاطئة! راجع الإجابة الصحيحة المظللة بالأخضر.';
+    }
+}
+
+// ===== Check Final Test Answer =====
+function checkFinal(btn, qId, result) {
+    if (finalAnswered.has(qId)) return;
+    finalAnswered.add(qId);
+    
+    const question = document.getElementById(qId);
+    const feedback = document.getElementById('feedback_' + qId);
+    const buttons = question.querySelectorAll('.option-btn, .tf-btn');
+    
+    buttons.forEach(b => b.disabled = true);
+    
+    if (result === 'correct') {
+        btn.classList.add('correct');
+        question.classList.add('answered-correct');
+        feedback.className = 'feedback correct-feedback';
+        feedback.textContent = '✅ إجابة صحيحة! أحسنت 🎉';
+        finalScore++;
+    } else {
+        btn.classList.add('wrong');
+        question.classList.add('answered-wrong');
+        feedback.className = 'feedback wrong-feedback';
+        buttons.forEach(b => {
+            if (b.onclick && b.onclick.toString().includes("'correct'")) {
+                b.classList.add('correct');
+            }
+        });
+        feedback.textContent = '❌ إجابة خاطئة! راجع الإجابة الصحيحة المظللة بالأخضر.';
+    }
+    
+    // Check if all final questions answered
+    if (finalAnswered.size === finalTotal) {
+        setTimeout(showFinalResults, 800);
+    }
+}
+
+// Fix for qf_9 - correct answer is خليج عدن
+document.addEventListener('DOMContentLoaded', function() {
+    // Re-assign qf_9 buttons
+    const qf9 = document.getElementById('qf_9');
+    if (qf9) {
+        const btns = qf9.querySelectorAll('.option-btn');
+        btns[0].onclick = function() { checkFinal(this, 'qf_9', 'wrong'); };
+        btns[1].onclick = function() { checkFinal(this, 'qf_9', 'correct'); }; // خليج عدن
+        btns[2].onclick = function() { checkFinal(this, 'qf_9', 'wrong'); };
+        btns[3].onclick = function() { checkFinal(this, 'qf_9', 'wrong'); };
+    }
+});
+
+// ===== Show Final Results =====
+function showFinalResults() {
+    const container = document.getElementById('resultsContainer');
+    const circle = document.getElementById('resultsCircle');
+    const percent = document.getElementById('resultsPercent');
+    const message = document.getElementById('resultsMessage');
+    const detail = document.getElementById('resultsDetail');
+    
+    const pct = Math.round((finalScore / finalTotal) * 100);
+    
+    container.style.display = 'block';
+    circle.style.setProperty('--percentage', pct + '%');
+    percent.textContent = pct + '%';
+    
+    if (pct >= 90) {
+        message.textContent = '🌟 ممتاز! أداء رائع';
+        message.style.color = 'var(--accent-1)';
+    } else if (pct >= 75) {
+        message.textContent = '👏 جيد جداً!';
+        message.style.color = 'var(--accent-5)';
+    } else if (pct >= 60) {
+        message.textContent = '👍 جيد، يمكنك التحسن';
+        message.style.color = 'var(--accent-4)';
+    } else {
+        message.textContent = '📖 يحتاج مراجعة';
+        message.style.color = 'var(--accent-3)';
+    }
+    
+    detail.textContent = `أجبت على ${finalScore} من ${finalTotal} أسئلة بشكل صحيح`;
+    
+    container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ===== Restart Final Test =====
+function restartFinalTest() {
+    finalScore = 0;
+    finalAnswered.clear();
+    
+    const container = document.getElementById('finalQuizContainer');
+    const questions = container.querySelectorAll('.quiz-question');
+    
+    questions.forEach(q => {
+        q.classList.remove('answered-correct', 'answered-wrong');
+        const buttons = q.querySelectorAll('.option-btn, .tf-btn');
+        buttons.forEach(b => {
+            b.disabled = false;
+            b.classList.remove('correct', 'wrong');
+        });
+        const fb = q.querySelector('.feedback');
+        if (fb) {
+            fb.className = 'feedback';
+            fb.textContent = '';
+        }
+    });
+    
+    document.getElementById('resultsContainer').style.display = 'none';
+    container.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ===== Update Score =====
+function updateScore() {
+    document.getElementById('scoreValue').textContent = score;
+}
+
+// ===== Progress Bar =====
+function updateProgress() {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+}
+
+// ===== Scroll To Top Button =====
+function toggleScrollTop() {
+    const btn = document.getElementById('scrollTop');
+    if (window.pageYOffset > 400) {
+        btn.classList.add('visible');
+    } else {
+        btn.classList.remove('visible');
+    }
+}
+
+// ===== Fade In Sections =====
+function handleFadeIn() {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            section.classList.add('visible');
+        }
+    });
+}
+
+// ===== Particles =====
+function createParticles() {
+    const container = document.getElementById('particles');
+    const colors = ['rgba(0,212,170,0.3)', 'rgba(124,77,255,0.3)', 'rgba(255,107,107,0.2)', 'rgba(255,217,61,0.2)', 'rgba(107,207,255,0.3)'];
+    
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const size = Math.random() * 6 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+        particle.style.animationDelay = (Math.random() * 20) + 's';
+        container.appendChild(particle);
+    }
+}
+
+// ===== Event Listeners =====
+window.addEventListener('scroll', () => {
+    updateProgress();
+    toggleScrollTop();
+    handleFadeIn();
+});
+
+window.addEventListener('load', () => {
+    loadTheme();
+    createParticles();
+    handleFadeIn();
+});
+</script>
+</body>
+</html>
